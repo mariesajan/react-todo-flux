@@ -4,20 +4,42 @@ import { Link } from "react-router";
 export default class Layout extends React.Component{
   constructor(props){
     super(props);
-    this.state= {listItem: []};
+    let storage_item= [];
+    if(typeof(Storage) !== "undefined"){
+      let check_item = localStorage["item_key"];
+      try{  // the stored items should be an array
+        storage_item = JSON.parse(check_item);
+        if(!Array.isArray(storage_item)){
+          storage_item = [];
+        }
+      }
+      catch(e){
+        console.log('Error found. The stored value is incorrect',e);
+      }
+    }else{
+      console.log("Local Storage not supported in the browser");
+    }
+    this.state= {listItem: storage_item};
   }
+
+  componentDidUpdate(){
+    const { listItem } = this.state;
+    localStorage["item_key"] = JSON.stringify(listItem);
+  }
+
   updateTodoListItem(editText, index){
-    let { listItem } = this.state;
+    const { listItem } = this.state;
     listItem[index] = editText;
     this.setState({listItem: listItem});
   }
+
   removeTodoListItem(index){
-    let { listItem } = this.state;
+    const { listItem } = this.state;
     listItem.splice(index, 1);
     this.setState({listItem: listItem});
   }
   addTodoListItem(item){
-    let { listItem } = this.state;
+    const { listItem } = this.state;
     let allItems = listItem.concat(item);
     this.setState({listItem: allItems});
   }
@@ -42,7 +64,6 @@ export default class Layout extends React.Component{
                     removeTodoListItem: this.removeTodoListItem.bind(this)
                   }
         )}
-        {/*{this.props.children}*/}
       </div>
     );
   }

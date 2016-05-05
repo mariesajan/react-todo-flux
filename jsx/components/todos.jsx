@@ -17,9 +17,7 @@ export default class Todos extends React.Component{
       const { item } = this.props;
       const { todoItem } = this.state;
       this.setState({todoItem: ''});
-      if(typeof this.props.addTodoListItem === 'function'){
-        this.props.addTodoListItem(todoItem);
-      }
+      this.props.addTodoListItem(todoItem);
     }
   }
   updateTodoListItem(editText, index){
@@ -40,13 +38,16 @@ export default class Todos extends React.Component{
     return(
       <div class="div_todo">
         <h2> Todo App </h2>
-        <input value={todoItem} type="text" onKeyPress={this.updateInputOnKeypress.bind(this)}
-          onChange= {this.updateInputOnChange.bind(this)} autoFocus="autofocus" />
+        <input value={todoItem} type="text"
+               onKeyPress={this.updateInputOnKeypress.bind(this)}
+               onChange= {this.updateInputOnChange.bind(this)}
+               autoFocus="autofocus" />
         <br />
         <h3> Todo List </h3>
         {defaultTodoContent}
         <Todo removeListItem={this.removeTodoListItem.bind(this)}
-          changeListItem={this.updateTodoListItem.bind(this)} items={item} />
+              changeListItem={this.updateTodoListItem.bind(this)}
+              items={item} />
         <Footer />
       </div>
     );
