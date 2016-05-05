@@ -4,7 +4,6 @@ import ReactDOM from "react-dom";
 export default class Todo extends React.Component{
   constructor(props){
     super(props);
-    console.log('in constructor', this.props);
     this.state = {editText: '', indexOfEdit: '', showButtonIndex: ''};
   }
   onDoubleClickListItem(index){
@@ -27,7 +26,6 @@ export default class Todo extends React.Component{
     this.props.changeListItem(this.state.editText, index);
   }
   onDeleteClick(index){
-    console.log('on Delete click...',index);
     this.props.removeListItem(index);
   }
   onMouseEnterListItem(index){
@@ -37,7 +35,6 @@ export default class Todo extends React.Component{
     this.setState({showButtonIndex: ''});
   }
   render(){
-    console.log('in render of todo');
     const { items }= this.props;
     let { indexOfEdit, editText, showButtonIndex } = this.state;
     var createItem = function(currValue, index){

@@ -1,26 +1,23 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import Todo from "./todo";
+import Footer from "./footer";
 
 export default class Todos extends React.Component{
   constructor(props){
     super(props);
     this.state= { todoItem: ''};
     const { item } = this.props;
-    console.log('constructor of Todos..',item);
   }
   updateInputOnChange(event){
     this.setState({todoItem: event.target.value});
   }
   updateInputOnKeypress(event){
     if(event.key== 'Enter'){
-      const { item } = this.props
-      console.log('after Enter pressed:',this.props);
+      const { item } = this.props;
       const { todoItem } = this.state;
       this.setState({todoItem: ''});
-      console.log('in console type of:',typeof this.props.addTodoListItem);
       if(typeof this.props.addTodoListItem === 'function'){
-        console.log('inside typeof if...');
         this.props.addTodoListItem(todoItem);
       }
     }
@@ -29,22 +26,28 @@ export default class Todos extends React.Component{
     this.props.updateTodoListItem(editText, index);
   }
   removeTodoListItem(index){
-    console.log('in removeTodoListItem...', index);
     this.props.removeTodoListItem(index);
   }
   render(){
     const { todoItem } = this.state;
     let { item } = this.props;
-    console.log('item is... ',item);
+    let defaultTodoContent;
+    if(item.length <= 0){
+      defaultTodoContent = <p>No items added!! </p>;
+    }else{
+      defaultTodoContent = null;
+    }
     return(
       <div class="div_todo">
-        <h3>Todo</h3>
+        <h2> Todo App </h2>
         <input value={todoItem} type="text" onKeyPress={this.updateInputOnKeypress.bind(this)}
           onChange= {this.updateInputOnChange.bind(this)} autoFocus="autofocus" />
         <br />
-        <p>Items added are: </p>
+        <h3> Todo List </h3>
+        {defaultTodoContent}
         <Todo removeListItem={this.removeTodoListItem.bind(this)}
           changeListItem={this.updateTodoListItem.bind(this)} items={item} />
+        <Footer />
       </div>
     );
   }
