@@ -4,6 +4,13 @@ import Todo from "./todo";
 import Footer from "./footer";
 
 export default class Todos extends React.Component{
+  static propTypes = {
+    item: React.PropTypes.array.isRequired,
+    addTodoListItem: React.PropTypes.func.isRequired,
+    updateTodoListItem: React.PropTypes.func.isRequired,
+    removeTodoListItem: React.PropTypes.func.isRequired
+  };
+
   constructor(props){
     super(props);
     this.state= { todoItem: ''};

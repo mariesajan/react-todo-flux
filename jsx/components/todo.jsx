@@ -2,12 +2,18 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 export default class Todo extends React.Component{
+  static propTypes = {
+    items: React.PropTypes.array.isRequired,
+    changeListItem: React.PropTypes.func.isRequired,
+    removeListItem:  React.PropTypes.func.isRequired
+  };
   constructor(props){
     super(props);
     this.state = {editText: '', indexOfEdit: '', showButtonIndex: ''};
   }
   onDoubleClickListItem(index){
-    this.setState({indexOfEdit: index, editText: this.props.items[index]});
+    let { items } = this.props;
+    this.setState({indexOfEdit: index, editText: items[index]});
     this.onMouseLeaveListItem();
   }
   onEditText(e){
