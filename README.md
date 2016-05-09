@@ -1,7 +1,9 @@
 ## Todo App
 An example project done as part of learning **react, webpack, babel** and **react-router**
 
-Users can add, edit and remove items in the Todo List.
+This app helps you to get organized with the tasks. You can add/edit the items in the Todo List
+and can remove the completed items later.
+
 
 ### Installation
 
