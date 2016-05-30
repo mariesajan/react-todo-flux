@@ -1,5 +1,5 @@
 ## Todo App
-An example project done as part of learning **react, webpack, babel** and **react-router**
+An example project done as part of learning **react, webpack, babel,react-router** and **[flux](https://facebook.github.io/flux/docs/overview.html)**
 
 This app helps you to get organized with the tasks. You can add/edit the items in the Todo List
 and can remove the completed items later.
