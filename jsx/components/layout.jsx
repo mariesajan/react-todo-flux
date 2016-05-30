@@ -1,25 +1,17 @@
 import React from "react";
 import { Link } from "react-router";
+import TodoStore from "./TodoStore";
 
 export default class Layout extends React.Component{
   constructor(props){
     super(props);
-    let storage_item= [];
-    if(typeof(Storage) !== "undefined"){
-      let check_item = localStorage["item_key"];
-      try{  // the stored items should be an array
-        storage_item = JSON.parse(check_item);
-        if(!Array.isArray(storage_item)){
-          storage_item = [];
-        }
-      }
-      catch(e){
-        console.log('Error found. The stored value is incorrect',e);
-      }
-    }else{
-      console.log("Local Storage not supported in the browser");
-    }
-    this.state= {listItem: storage_item};
+    this.state= {listItem: TodoStore.getItem()};
+  }
+  componentWillMount(){
+    TodoStore.on("change", ()=> {
+        this.setState({listItem: TodoStore.getItem()})
+      });
+      console.log('count is...', TodoStore.listenerCount('change'));
   }
 
   componentDidUpdate(){

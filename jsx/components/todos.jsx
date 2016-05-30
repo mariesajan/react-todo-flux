@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import Todo from "./todo";
 import Footer from "./footer";
+import * as TodoActions from "./Actions";
 
 export default class Todos extends React.Component{
   static propTypes = {
@@ -49,6 +50,8 @@ export default class Todos extends React.Component{
                onKeyPress={this.updateInputOnKeypress.bind(this)}
                onChange= {this.updateInputOnChange.bind(this)}
                autoFocus="autofocus" />
+             <button onClick={TodoActions.createTodo.bind(this,"Laundry")}>Create Todo</button>
+             <button onClick={TodoActions.reloadTodos.bind(this)}>Reload!!</button>
         <br />
         <h3> Todo List </h3>
         {defaultTodoContent}
